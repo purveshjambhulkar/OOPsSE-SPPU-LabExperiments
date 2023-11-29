@@ -7,8 +7,6 @@
 
 import java.util.Scanner;
 
-
-
 class Publication {
   public String title;
   public double price = 250;
@@ -39,7 +37,7 @@ class Publication {
   }
 
   public void sellCopy() {
-    System.out.println("Total Sell : " + copies  * price);
+    System.out.println("Total Sell : " + copies * price);
 
   }
 
@@ -76,7 +74,6 @@ class Book extends Publication {
 class Magazine extends Publication {
   private int orderQty;
   private String Issue;
-  
 
   public String getcurrIssue() {
     return Issue;
@@ -119,7 +116,7 @@ public class classmain {
     Book book = new Book();
     book.orderCopies();
     book.sellCopy();
-    
+
     System.out.println();
 
     Magazine magazine = new Magazine();
