@@ -111,7 +111,7 @@ class Magazine extends Publication {
 
 }
 
-public class classmain {
+public class Polymorphism {
   public static void main(String[] args) {
     Book book = new Book();
     book.orderCopies();
