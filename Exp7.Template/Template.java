@@ -27,7 +27,7 @@ public class Template {
         int even_count = 0;
         int odd_count = 0;
         int prime_count = 0;
-        int palindrome = 0;
+        int palindrome = 0; 
 
         if (type.equals("even")) {
             for(T element : arr){

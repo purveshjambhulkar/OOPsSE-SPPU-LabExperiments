@@ -1,142 +1,48 @@
-/*
- * 8. File Handling
- * Implement a program for maintaining a database of student records using
- * Files.
- * Student has Student_id,name,Roll_no, Class, marks and address. Display the
- * data for few students.
- * i) Create Database ii)Display Database
- * iii) Delete Records
- * iv) Update Record v)Search Record
- * 
- */
-
-import java.io.*;
 import java.util.*;
 
-public class Practical8 {   
- public static void main(String[] args) {
- Scanner scanner = new
-Scanner(System.in);
- Database database = new Database();
- while (true) {
- System.out.println("Student
-Database Management System");
- System.out.println("1. Create
-Database");
- System.out.println("2. Display
-Database");
- System.out.println("3. Delete
-Record");
- System.out.println("4. Update
-Record");
- System.out.println("5. Search
-Record");
- System.out.println("6. Exit");System.out.print("Enter your
-choice: ");
- int choice = scanner.nextInt();
- switch (choice) {
- case 1:
- System.out.print("Enter
-Student ID: ");
- int studentId =
-scanner.nextInt();
- scanner.nextLine(); // Consume
-the newline character
- System.out.print("Enter Name:
-");
- String name =
-scanner.nextLine();
- System.out.print("Enter Roll
-No: ");
- int rollNo = scanner.nextInt();
- scanner.nextLine(); // Consume
-the newline character
- System.out.print("Enter Class:
-");
- String className =
-scanner.nextLine();System.out.print("Enter Marks:
-");
- int marks = scanner.nextInt();
- scanner.nextLine(); // Consume
-the newline character
- System.out.print("Enter
-Address: ");
- String address =
-scanner.nextLine();
- Student student = new
-Student(studentId, name, rollNo,
-className, marks, address);
- database.addStudent(student);
- System.out.println("Student
-record added successfully!");
- break;
- case 2:
- database.displayDatabase();
- break;
- case 3:
- System.out.print("Enter
-Student ID to delete record: ");
- int deleteId =
-scanner.nextInt();
+public class Practical8 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Database database = new Database();
 
-database.deleteRecord(deleteId);
- System.out.println("Student
-record deleted successfully!");
- break;case 4:
- System.out.print("Enter
-Student ID to update record: ");
- int updateId =
-scanner.nextInt();
- scanner.nextLine(); // Consume
-the newline character
- System.out.print("Enter New
-Name: ");
- String newName =
-scanner.nextLine();
- System.out.print("Enter New
-Roll No: ");
- int newRollNo =
-scanner.nextInt();
- scanner.nextLine(); // Consume
-the newline character
- System.out.print("Enter New
-Class: ");
- String newClassName =
-scanner.nextLine();
- System.out.print("Enter New
-Marks: ");
- int newMarks =
-scanner.nextInt();
- scanner.nextLine(); // Consume
-the newline character
- System.out.print("Enter New
-Address: ");
- String newAddress =
-scanner.nextLine();
+        while (true) {
+            System.out.println("Student Database Management System");
+            System.out.println("1. Create Database");
+            System.out.println("2. Display Database");
+            System.out.println("3. Delete Record");
+            System.out.println("4. Update Record");
+            System.out.println("5. Search Record");
+            System.out.println("6. Exit");
 
-database.updateRecord(updateIdnewName, newRollNo, newClassName,
-newMarks, newAddress);
- System.out.println("Student
-record updated successfully!");
- break;
- case 5:
- System.out.print("Enter
-Student ID to search record: ");
- int searchId =
-scanner.nextInt();
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-database.searchRecord(searchId);
- break;
- case 6:
- System.out.println("Exiting...");
- System.exit(0);
- default:
- System.out.println("Invalid
-choice! Please try again.");
- break;
- }
- }
- }
+            switch (choice) {
+                case 1:
+                    database.createStudent(scanner);
+                    break;
+                case 2:
+                    database.displayDatabase();
+                    break;
+                case 3:
+                    database.deleteRecord(scanner);
+                    break;
+                case 4:
+                    database.updateRecord(scanner);
+                    break;
+                case 5:
+                    database.searchRecord(scanner);
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+                    break;
+            }
+        }
+    }
 }
 
 class Student {
@@ -147,7 +53,6 @@ class Student {
     private int marks;
     private String address;
 
-    // Constructor
     public Student(int studentId, String name, int rollNo, String className, int marks, String address) {
         this.studentId = studentId;
         this.name = name;
@@ -157,7 +62,6 @@ class Student {
         this.address = address;
     }
 
-    // Getters and Setters
     public int getStudentId() {
         return studentId;
     }
@@ -205,92 +109,122 @@ class Student {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    // Getters and Setters...
+    
 }
 
 class Database {
     private List<Student> students;
 
-    // Constructor
     public Database() {
         students = new ArrayList<>();
     }
 
-    // Add a student record to the database
-    public void addStudent(Student student) {
+    public void createStudent(Scanner scanner) {
+        System.out.print("Enter Student ID: ");
+        int studentId = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter Name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter Roll No: ");
+        int rollNo = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter Class: ");
+        String className = scanner.nextLine();
+
+        System.out.print("Enter Marks: ");
+        int marks = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter Address: ");
+        String address = scanner.nextLine();
+
+        Student student = new Student(studentId, name, rollNo, className, marks, address);
         students.add(student);
+        System.out.println("Student record added successfully!");
     }
-    // Display all student records in the
-    database
 
- public void displayDatabase() {
- for (Student student : students) {
- System.out.println("Student ID: " +
-student.getStudentId());
- System.out.println("Name: " +
-student.getName());System.out.println("Roll No: " +
-student.getRollNo());
- System.out.println("Class: " +
-student.getClassName());
- System.out.println("Marks: " +
-student.getMarks());
- System.out.println("Address: " +
-student.getAddress());
- System.out.println("--------------------
----------");
- }
- }
-    // Delete a student record from the
-    database
-
-    public void deleteRecord(int studentId) {
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getStudentId() == studentId) {
-                students.remove(i);
-                break;
-            }
+    public void displayDatabase() {
+        for (Student student : students) {
+            displayStudentInfo(student);
         }
     }
-    // Update a student record in the
-    database
 
-    public void updateRecord(int studentId,
-            String newName, int newRollNo, String newClassName, int newMarks, String newAddress) {
+    private void displayStudentInfo(Student student) {
+        System.out.println("Student ID: " + student.getStudentId());
+        System.out.println("Name: " + student.getName());
+        System.out.println("Roll No: " + student.getRollNo());
+        System.out.println("Class: " + student.getClassName());
+        System.out.println("Marks: " + student.getMarks());
+        System.out.println("Address: " + student.getAddress());
+        System.out.println("-----------------------");
+    }
+
+    public void deleteRecord(Scanner scanner) {
+        System.out.print("Enter Student ID to delete record: ");
+        int deleteId = scanner.nextInt();
+
+        for (Iterator<Student> iterator = students.iterator(); iterator.hasNext(); ) {
+            Student student = iterator.next();
+            if (student.getStudentId() == deleteId) {
+                iterator.remove();
+                System.out.println("Student record deleted successfully!");
+                return;
+            }
+        }
+        System.out.println("Student record not found!");
+    }
+
+    public void updateRecord(Scanner scanner) {
+        System.out.print("Enter Student ID to update record: ");
+        int updateId = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
         for (Student student : students) {
-            if (student.getStudentId() == studentId) {
+            if (student.getStudentId() == updateId) {
+                System.out.print("Enter New Name: ");
+                String newName = scanner.nextLine();
+
+                System.out.print("Enter New Roll No: ");
+                int newRollNo = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                System.out.print("Enter New Class: ");
+                String newClassName = scanner.nextLine();
+
+                System.out.print("Enter New Marks: ");
+                int newMarks = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                System.out.print("Enter New Address: ");
+                String newAddress = scanner.nextLine();
+
                 student.setName(newName);
                 student.setRollNo(newRollNo);
-
                 student.setClassName(newClassName);
                 student.setMarks(newMarks);
-
                 student.setAddress(newAddress);
-                break;
+                System.out.println("Student record updated successfully!");
+                return;
             }
         }
+        System.out.println("Student record not found!");
     }
-    // Search for a student record in the
-    database
 
- public void searchRecord(int studentId)
-{
- for (Student student : students) {
- if (student.getStudentId() ==
-studentId) {
- System.out.println("Student ID: "
-+ student.getStudentId());
- System.out.println("Name: " +
-student.getName());
- System.out.println("Roll No: " +
-student.getRollNo());
- System.out.println("Class: " +
-student.getClassName());
- System.out.println("Marks: " +
-student.getMarks());
- System.out.println("Address: " +
-student.getAddress());System.out.println("-----------------
-------------");
- break;
- }
- }
- }
+    public void searchRecord(Scanner scanner) {
+        System.out.print("Enter Student ID to search record: ");
+        int searchId = scanner.nextInt();
+
+        for (Student student : students) {
+            if (student.getStudentId() == searchId) {
+                displayStudentInfo(student);
+                return;
+            }
+        }
+        System.out.println("Student record not found!");
+    }
 }
